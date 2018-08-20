@@ -15,10 +15,9 @@ class Captain < ActiveRecord::Base
 
   def self.talented_seafarers
     where("id IN (?)", self.sailors.pluck(:id) & self.motorboaters.pluck(:id))
-    # self.includes(boats: :classifications).where(classifications: {name: "Sailboat", "Motorboat"})
   end
 
   def self.non_sailors
-    self.joins(:boats).where("boat_classification.name = ? and captain_id = ?", "Sailboat", false)
+    self.sailors.where.not(captain_id: true)
   end
 end
