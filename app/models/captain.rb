@@ -18,6 +18,6 @@ class Captain < ActiveRecord::Base
   end
 
   def self.non_sailors
-    self.all.exclude?(self.sailors).where.not(id: true)
+    !self.sailors.where.not(id: true)
   end
 end
