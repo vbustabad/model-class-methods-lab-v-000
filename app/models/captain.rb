@@ -7,13 +7,13 @@ class Captain < ActiveRecord::Base
 
   def self.sailors
     self.includes(boats: :classifications).where(classifications: {name: "Sailboat"}).distinct
-  end 
+  end
 
   def self.talented_seafarers
     # self.includes(boats: :classifications).where(classifications: {name: "Sailboat", "Motorboat"})
-  end 
+  end
 
   def self.non_sailors
-    # self.where(["classification.name = :classification_name and captain_id = :captain_id", { classification_name: "Sailboat", captain_id: false }])
-  end 
+    where("classification = ? and captain_id = ?", "Sailboat", false)
+  end
 end
